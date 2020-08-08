@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/keyLine_4">
+
+        <ImageView
+            android:id="@+id/transaction_image"
+            android:layout_width="@dimen/transaction_image_size"
+            android:layout_height="56dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/transaction_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyLine_4"
+            android:layout_marginEnd="@dimen/keyLine_4"
+            android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
+            app:layout_constraintEnd_toStartOf="@+id/transaction_amount"
+            app:layout_constraintStart_toEndOf="@+id/transaction_image"
+            app:layout_constraintTop_toTopOf="@+id/transaction_image"
+            tools:text="Корм коту" />
+
+        <TextView
+            android:id="@+id/transaction_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyLine_4"
+            android:layout_marginTop="@dimen/keyLine_2"
+            android:layout_marginEnd="@dimen/keyLine_4"
+            android:textAppearance="@style/TextAppearance.MyTheme.Subtitle2"
+            app:layout_constraintEnd_toStartOf="@+id/transaction_amount"
+            app:layout_constraintStart_toEndOf="@+id/transaction_image"
+            app:layout_constraintTop_toBottomOf="@+id/transaction_title"
+            tools:text="Расход" />
+
+        <TextView
+            android:id="@+id/transaction_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+            app:layout_constraintBottom_toBottomOf="@+id/transaction_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/transaction_title"
+            tools:text="+45"
+            tools:textColor="@color/color_text_positive" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

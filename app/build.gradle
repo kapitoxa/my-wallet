@@ -51,11 +51,9 @@ dependencies {
 
     // Material design components
     implementation "com.google.android.material:material:$version_material"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation "junit:junit:$version_junit"
     androidTestImplementation "androidx.test.ext:junit:$version_junit_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$version_espresso_core"
-}
-repositories {
-    mavenCentral()
 }

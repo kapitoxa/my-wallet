@@ -68,12 +68,12 @@
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
     </style>
 
-    <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight">
         <item name="alphaEmphasisHigh">@dimen/alpha_emphasis_high</item>
         <item name="alphaEmphasisMedium">@dimen/alpha_emphasis_medium</item>
         <item name="alphaEmphasisDisabled">@dimen/alpha_emphasis_disabled</item>
 
-        <!--        <item name="android:statusBarColor">?colorSurface</item>-->
+        <item name="android:statusBarColor">?colorPrimary</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
