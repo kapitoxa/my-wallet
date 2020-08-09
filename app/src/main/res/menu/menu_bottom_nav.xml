@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/operationsFragment"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        android:title="@string/fragment_operations_bottom_nav_label" />
+    <item
+        android:id="@+id/categoriesFragment"
+        android:icon="@drawable/ic_outline_category_24"
+        android:title="@string/fragment_categories_bottom_nav_label" />
+</menu>

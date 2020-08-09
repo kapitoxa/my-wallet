@@ -12,6 +12,9 @@
     <string name="fragment_categories_label">Все категории</string>
     <string name="fragment_category_detail_label">Категория</string>
 
+    <string name="fragment_operations_bottom_nav_label">Операции</string>
+    <string name="fragment_categories_bottom_nav_label">Категории</string>
+
     <string name="item_operation_image_default_label">Пустое изображение проведенной операции</string>
 
     <string name="operation_title_label">Операция</string>
