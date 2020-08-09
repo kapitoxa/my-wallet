@@ -6,4 +6,9 @@
     <string name="tab_text_2">Tab 2</string>
 
     <string name="bottom_navigation_income_title">Доход</string>
+
+    <string name="operation_title_label">Операция</string>
+    <string name="operation_date_label">Дата операции</string>
+    <string name="operation_category_label">Категория</string>
+    <string name="operation_action_save_label">Сохранить</string>
 </resources>

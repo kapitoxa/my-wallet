@@ -8,5 +8,14 @@
         android:id="@+id/operationsFragment"
         android:name="ru.kapitoxa.mywallet.operations.OperationsFragment"
         android:label="OperationsFragment"
-        tools:layout="@layout/fragment_operations" />
+        tools:layout="@layout/fragment_operations">
+        <action
+            android:id="@+id/action_operationsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="ru.kapitoxa.mywallet.operationdetail.OperationDetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_operation_detail" />
 </navigation>

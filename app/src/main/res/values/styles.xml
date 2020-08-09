@@ -17,6 +17,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Components-->
+    <style name="Widget.MyTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">?colorOnPrimary</item>
+        <item name="boxStrokeColor">?colorPrimary</item>
+    </style>
+
+    <style name="Widget.MyTheme.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">?colorOnPrimary</item>
+        <item name="boxStrokeColor">?colorPrimary</item>
+    </style>
 
     <!--Bottom Sheets-->
     <style name="ThemeOverlay.MyTheme.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
