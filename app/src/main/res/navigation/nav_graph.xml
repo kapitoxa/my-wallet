@@ -18,4 +18,9 @@
         android:name="ru.kapitoxa.mywallet.operationdetail.OperationDetailFragment"
         android:label="@string/fragment_operation_detail_label"
         tools:layout="@layout/fragment_operation_detail" />
+    <fragment
+        android:id="@+id/categoryDetailFragment"
+        android:name="ru.kapitoxa.mywallet.categorydetail.CategoryDetailFragment"
+        android:label="@string/fragment_category_detail_label"
+        tools:layout="@layout/fragment_category_detail" />
 </navigation>
