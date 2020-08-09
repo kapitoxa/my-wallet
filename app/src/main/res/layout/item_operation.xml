@@ -16,6 +16,7 @@
             android:id="@+id/operation_image"
             android:layout_width="@dimen/transaction_image_size"
             android:layout_height="56dp"
+            android:contentDescription="@string/item_operation_image_default_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
