@@ -10,7 +10,7 @@
     <string name="fragment_operations_label">Все операции</string>
     <string name="fragment_operation_detail_label">Операция</string>
 
-    <string name="item_operation_image_default_label">Пустое проведенной изображение операции</string>
+    <string name="item_operation_image_default_label">Пустое изображение проведенной операции</string>
 
     <string name="operation_title_label">Операция</string>
     <string name="operation_date_label">Дата операции</string>
