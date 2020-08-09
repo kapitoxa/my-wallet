@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="ru.kapitoxa.mywallet.operations.OperationsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -35,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/keyLine_4"
+            android:onClick="@{() -> viewModel.navigateToOperationDetail()}"
             android:src="@drawable/ic_add_white_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
