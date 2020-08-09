@@ -18,9 +18,11 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.detailFragment -> supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
-                else -> supportActionBar?.setIcon(R.drawable.ic_baseline_arrow_back_24)
+            if (destination.id == R.id.operationDetailFragment
+                    || destination.id == R.id.categoryDetailFragment) {
+                supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
+            } else {
+                supportActionBar?.setIcon(R.drawable.ic_baseline_arrow_back_24)
             }
         }
     }

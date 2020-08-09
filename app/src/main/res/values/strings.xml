@@ -9,6 +9,7 @@
 
     <string name="fragment_operations_label">Все операции</string>
     <string name="fragment_operation_detail_label">Операция</string>
+    <string name="fragment_categories_label">Все категории</string>
     <string name="fragment_category_detail_label">Категория</string>
 
     <string name="item_operation_image_default_label">Пустое изображение проведенной операции</string>
