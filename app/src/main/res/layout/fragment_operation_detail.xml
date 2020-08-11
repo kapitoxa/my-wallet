@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/title_text"
-                style="@style/MyTheme.DayNight.Headline5.OnPrimary"
+                style="@style/MyTheme.DayNight.FormTopTitle.OnPrimary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/operation_title"
@@ -88,7 +88,7 @@
             <TextView
                 android:id="@+id/category_title_text"
 
-                style="@style/MyTheme.DayNight.Subtitle1"
+                style="@style/MyTheme.DayNight.BottomFormSubtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/operation_category_label"

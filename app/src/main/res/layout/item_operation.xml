@@ -23,11 +23,11 @@
 
         <TextView
             android:id="@+id/operation_title"
+            style="@style/MyTheme.DayNight.ItemTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/keyLine_4"
             android:layout_marginEnd="@dimen/keyLine_4"
-            android:textAppearance="@style/TextAppearance.MyTheme.OperationTitle"
             app:layout_constraintEnd_toStartOf="@+id/operation_amount"
             app:layout_constraintStart_toEndOf="@+id/operation_image"
             app:layout_constraintTop_toTopOf="@+id/operation_image"
@@ -35,12 +35,12 @@
 
         <TextView
             android:id="@+id/operation_type"
+            style="@style/MyTheme.DayNight.ItemSubtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/keyLine_4"
             android:layout_marginTop="@dimen/keyLine_2"
             android:layout_marginEnd="@dimen/keyLine_4"
-            android:textAppearance="@style/TextAppearance.MyTheme.Subtitle2"
             app:layout_constraintEnd_toStartOf="@+id/operation_amount"
             app:layout_constraintStart_toEndOf="@+id/operation_image"
             app:layout_constraintTop_toBottomOf="@+id/operation_title"

@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/MyTheme.DayNight.ItemTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.MyTheme.OperationTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,10 +18,10 @@
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/MyTheme.DayNight.ItemSubtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/keyLine_2"
-        android:textAppearance="@style/TextAppearance.MyTheme.Subtitle2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"

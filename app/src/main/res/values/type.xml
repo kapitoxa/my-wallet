@@ -66,7 +66,7 @@
     </style>
 
     <style name="TextAppearance.MyTheme.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:textColor">@color/color_on_background</item>
+        <!--Your custom type style here-->
     </style>
 
     <style name="TextAppearance.MyTheme.Body1" parent="TextAppearance.MaterialComponents.Body1">
@@ -87,10 +87,6 @@
 
     <style name="TextAppearance.MyTheme.Overline" parent="TextAppearance.MaterialComponents.Overline">
         <!--Your custom type style here-->
-    </style>
-
-    <style name="TextAppearance.MyTheme.OperationTitle" parent="TextAppearance.MyTheme.Subtitle1">
-        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

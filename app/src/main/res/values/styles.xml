@@ -52,17 +52,27 @@
         <item name="android:paddingBottom">@dimen/keyLine_4</item>
     </style>
 
-    <style name="MyTheme.DayNight.Headline5">
+    <style name="MyTheme.DayNight.FormTopTitle">
         <item name="android:textAppearance">@style/TextAppearance.MyTheme.Headline5</item>
     </style>
 
-    <style name="MyTheme.DayNight.Headline5.OnPrimary" parent="MyTheme.DayNight.Headline5">
+    <style name="MyTheme.DayNight.FormTopTitle.OnPrimary" parent="MyTheme.DayNight.FormTopTitle">
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
-    <style name="MyTheme.DayNight.Subtitle1">
+    <style name="MyTheme.DayNight.BottomFormSubtitle">
         <item name="android:textAppearance">@style/TextAppearance.MyTheme.Subtitle1</item>
         <item name="android:textColor">?colorOnBackground</item>
+    </style>
+
+    <style name="MyTheme.DayNight.ItemSubtitle">
+        <item name="android:textAppearance">@style/TextAppearance.MyTheme.Subtitle2</item>
+        <item name="android:textColor">?colorOnBackground</item>
+    </style>
+
+    <style name="MyTheme.DayNight.ItemTitle">
+        <item name="android:textAppearance">@style/TextAppearance.MyTheme.Subtitle1</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Widget.MyTheme.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
