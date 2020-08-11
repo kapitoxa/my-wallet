@@ -23,7 +23,8 @@
     <string name="operation_category_label">Категория</string>
     <string name="operation_action_save_label">Сохранить</string>
 
-    <string name="category_title_label">Название</string>
+    <string name="category_title">Редактирование категории</string>
+    <string name="category_name_label">Название</string>
     <string name="category_type_label">Тип</string>
     <string name="category_action_save_label">Сохранить</string>
 </resources>

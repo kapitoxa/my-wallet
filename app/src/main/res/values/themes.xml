@@ -80,6 +80,7 @@
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">
             ?colorControlHighlight
         </item>
+        <item name="android:colorControlActivated">?colorSecondary</item>
 
         <!--Remap legacy AppCompat attributes to MaterialComponent attributes-->
         <item name="colorPrimaryDark">@color/color_primary_dark_color</item>
