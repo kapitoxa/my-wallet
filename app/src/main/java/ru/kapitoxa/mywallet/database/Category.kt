@@ -1,0 +1,23 @@
+package ru.kapitoxa.mywallet.database
+
+import androidx.room.*
+
+@Entity(
+        tableName = "category",
+        foreignKeys = [
+            ForeignKey(
+                    entity = CategoryType::class,
+                    parentColumns = ["id"],
+                    childColumns = ["type_id"])
+        ],
+        indices = [Index("type_id")]
+)
+data class Category(
+        @PrimaryKey(autoGenerate = true)
+        var id: Long = 0L,
+
+        var name: String,
+
+        @ColumnInfo(name = "type_id")
+        var typeId: Long
+)

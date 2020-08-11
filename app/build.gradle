@@ -16,6 +16,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation": "$projectDir/schemas".toString(),
+                        "room.incremental": "true"
+                ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -36,6 +44,7 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
     // Use viewModelScope from lifecycle-viewmodel-ktx
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle_viewmodel"
 
@@ -52,6 +61,10 @@ dependencies {
     // Material design components
     implementation "com.google.android.material:material:$version_material"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Room
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
 
     testImplementation "junit:junit:$version_junit"
     androidTestImplementation "androidx.test.ext:junit:$version_junit_ext"
