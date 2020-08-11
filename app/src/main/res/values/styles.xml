@@ -21,6 +21,48 @@
         <item name="boxBackgroundColor">?colorOnPrimary</item>
         <item name="boxStrokeColor">?colorSecondary</item>
         <item name="hintTextColor">?colorSecondary</item>
+        <item name="endIconTint">@color/filled_icon_tint</item>
+    </style>
+
+    <style name="Widget.MyTheme.TextInputLayout.PrimaryColor" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">?colorPrimary</item>
+        <item name="boxStrokeColor">@color/filled_stroke_color_on_primary</item>
+        <item name="hintTextColor">?colorOnPrimary</item>
+
+        <item name="android:textColorHint">?colorOnPrimary</item>
+        <item name="endIconTint">?colorOnPrimary</item>
+    </style>
+
+    <style name="Widget.MyTheme.EditText.OnPrimary" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="MyTheme.DayNight.FormTopContainer">
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:paddingStart">@dimen/keyLine_4</item>
+        <item name="android:paddingTop">@dimen/keyLine_4</item>
+        <item name="android:paddingEnd">@dimen/keyLine_4</item>
+        <item name="android:paddingBottom">@dimen/keyLine_6</item>
+    </style>
+
+    <style name="MyTheme.DayNight.FormBottomContainer">
+        <item name="android:paddingStart">@dimen/keyLine_4</item>
+        <item name="android:paddingTop">@dimen/keyLine_6</item>
+        <item name="android:paddingEnd">@dimen/keyLine_4</item>
+        <item name="android:paddingBottom">@dimen/keyLine_4</item>
+    </style>
+
+    <style name="MyTheme.DayNight.Headline5">
+        <item name="android:textAppearance">@style/TextAppearance.MyTheme.Headline5</item>
+    </style>
+
+    <style name="MyTheme.DayNight.Headline5.OnPrimary" parent="MyTheme.DayNight.Headline5">
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
+
+    <style name="MyTheme.DayNight.Subtitle1">
+        <item name="android:textAppearance">@style/TextAppearance.MyTheme.Subtitle1</item>
+        <item name="android:textColor">?colorOnBackground</item>
     </style>
 
     <style name="Widget.MyTheme.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
