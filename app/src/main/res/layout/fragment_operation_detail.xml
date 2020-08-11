@@ -11,20 +11,31 @@
         android:layout_height="match_parent"
         android:padding="@dimen/keyLine_4">
 
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/operation_title"
+            android:textAppearance="@style/TextAppearance.MyTheme.Headline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detail_title_layout"
             style="@style/Widget.MyTheme.TextInputLayout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/keyLine_5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/title_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/operation_title_label"
+                android:hint="@string/operation_name_label"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -33,11 +44,13 @@
             style="@style/Widget.MyTheme.TextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/keyLine_2"
-            android:layout_marginEnd="@dimen/keyLine_4"
-            app:layout_constraintEnd_toStartOf="@+id/detail_category_layout"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintHorizontal_weight="1"
+            android:layout_marginTop="@dimen/keyLine_4"
+            app:endIconCheckable="true"
+            app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
+            app:endIconMode="custom"
+            app:endIconTint="@color/filled_icon_tint"
+            app:endIconTintMode="src_in"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_title_layout">
 
@@ -47,27 +60,36 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/operation_date_label"
                 android:inputType="date" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/detail_category_layout"
-            style="@style/Widget.MyTheme.TextInputLayout.ExposedDropdownMenu"
+        <TextView
+            android:id="@+id/category_title_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/keyLine_2"
+            android:layout_marginTop="@dimen/keyLine_6"
+            android:text="@string/operation_category_label"
+            android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_weight="1.5"
-            app:layout_constraintStart_toEndOf="@+id/detail_date_layout"
-            app:layout_constraintTop_toBottomOf="@+id/detail_title_layout">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_date_layout" />
 
-            <AutoCompleteTextView
-                android:id="@+id/detail_category"
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/keyLine_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_title_text">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/category_chip_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/operation_category_label"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:animateLayoutChanges="true"
+                app:singleSelection="true" />
 
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -9,6 +9,7 @@
     <dimen name="keyLine_2">8dp</dimen>
     <dimen name="keyLine_4">16dp</dimen>
     <dimen name="keyLine_5">24dp</dimen>
+    <dimen name="keyLine_6">32dp</dimen>
 
     <dimen name="component_label_horizontal_margin">@dimen/keyLine_4</dimen>
 
