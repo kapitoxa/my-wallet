@@ -28,9 +28,11 @@
         <item name="boxBackgroundColor">?colorPrimary</item>
         <item name="boxStrokeColor">@color/filled_stroke_color_on_primary</item>
         <item name="hintTextColor">?colorOnPrimary</item>
-
         <item name="android:textColorHint">?colorOnPrimary</item>
         <item name="endIconTint">?colorOnPrimary</item>
+        <item name="boxStrokeErrorColor">@color/error_primary</item>
+        <item name="errorIconTint">@color/error_primary</item>
+        <item name="errorTextColor">@color/error_primary</item>
     </style>
 
     <style name="Widget.MyTheme.EditText.OnPrimary" parent="Widget.AppCompat.EditText">

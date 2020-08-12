@@ -26,6 +26,15 @@
         <argument
             android:name="category"
             app:argType="ru.kapitoxa.mywallet.database.Category" />
+        <action
+            android:id="@+id/action_categoryDetailFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/categoriesFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
