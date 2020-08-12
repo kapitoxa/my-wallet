@@ -18,7 +18,7 @@ buildscript {
         version_espresso_core = '3.2.0'
         version_room = '2.2.5'
         version_robolectric = '4.3.1'
-        version_mockito = '1.10.19'
+        version_mockito = '2.19.0'
     }
 
     repositories {
