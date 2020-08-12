@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import ru.kapitoxa.mywallet.database.Category
 import ru.kapitoxa.mywallet.databinding.FragmentCategoriesBinding
 
 
@@ -25,7 +26,8 @@ class CategoriesFragment : Fragment() {
         viewModel.navigateToCategoryDetail.observe(viewLifecycleOwner, Observer { navigate ->
             if (navigate) {
                 this.findNavController().navigate(
-                        CategoriesFragmentDirections.actionCategoriesFragmentToCategoryDetailFragment())
+                        CategoriesFragmentDirections
+                                .actionCategoriesFragmentToCategoryDetailFragment(Category()))
                 viewModel.onNavigatedToCategoryDetail()
             }
         })

@@ -22,7 +22,11 @@
         android:id="@+id/categoryDetailFragment"
         android:name="ru.kapitoxa.mywallet.categorydetail.CategoryDetailFragment"
         android:label="@string/fragment_category_detail_label"
-        tools:layout="@layout/fragment_category_detail" />
+        tools:layout="@layout/fragment_category_detail">
+        <argument
+            android:name="category"
+            app:argType="ru.kapitoxa.mywallet.database.Category" />
+    </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="ru.kapitoxa.mywallet.categories.CategoriesFragment"
