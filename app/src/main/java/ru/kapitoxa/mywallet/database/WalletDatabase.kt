@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import ru.kapitoxa.mywallet.R
+import java.util.concurrent.Executors
 
 @Database(entities = [
     Category::class,
@@ -28,12 +31,35 @@ abstract class WalletDatabase : RoomDatabase() {
                             WalletDatabase::class.java,
                             "wallet_database"
                     )
-                            .createFromAsset("database/wallet_database.db")
+                            .addCallback(Helper.onCreate(context))
                             .fallbackToDestructiveMigration()
                             .build()
+
+                    INSTANCE = instance
                 }
 
                 return instance
+            }
+        }
+    }
+
+    class Helper {
+        companion object {
+            fun onCreate(context: Context) = object : Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    Executors.newSingleThreadScheduledExecutor().execute {
+                        val dao = getInstance(context).walletDatabaseDao
+                        populate(context, dao)
+                    }
+                }
+            }
+
+            fun populate(context: Context, database: WalletDatabaseDao) {
+                database.insertAllCategoryTypes(
+                        CategoryType(name = context.getString(R.string.category_type_income)),
+                        CategoryType(name = context.getString(R.string.category_type_expense))
+                )
             }
         }
     }

@@ -14,6 +14,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import ru.kapitoxa.mywallet.R
 import java.io.IOException
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -23,18 +24,17 @@ class WalletDatabaseTest {
 
     private lateinit var walletDatabaseDao: WalletDatabaseDao
     private lateinit var database: WalletDatabase
+    private lateinit var context: Context
 
     @Before
     fun createAndPrePopulateDb() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
+        context = ApplicationProvider.getApplicationContext<Context>()
         database = Room.inMemoryDatabaseBuilder(context, WalletDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
 
         walletDatabaseDao = database.walletDatabaseDao
-
-        val types = WalletTestHelper.createArrayOfCategoryTypes()
-        walletDatabaseDao.insertAllCategoryTypes(*types)
+        WalletDatabase.Helper.populate(context, walletDatabaseDao)
     }
 
     @After
@@ -46,7 +46,7 @@ class WalletDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun readCategoryType() {
-        val expected = WalletTestHelper.createCategoryType(1L)
+        val expected = Helper.createCategoryType(context, 1L)
         val fromDb = walletDatabaseDao.getCategoryType(expected.id)
 
         Assert.assertEquals(expected, fromDb)
@@ -55,7 +55,7 @@ class WalletDatabaseTest {
     @Test
     @Throws(Exception::class)
     fun readAllCategoryTypes() {
-        val types = WalletTestHelper.createArrayOfCategoryTypes()
+        val types = Helper.createArrayOfCategoryTypes(context)
         val fromDb = walletDatabaseDao.getAllCategoryTypes().blockingValue
 
         Assert.assertEquals(types.asList(), fromDb)
@@ -65,7 +65,7 @@ class WalletDatabaseTest {
     @Throws(Exception::class)
     fun writeAndReadCategory() {
         val category = Category(1, "Food", 2)
-        val expected = WalletTestHelper.convertToCategoryType(category)
+        val expected = Helper.convertToCategoryType(context, category)
 
         walletDatabaseDao.insertCategory(category)
         val fromDb = walletDatabaseDao.getCategory(category.id)
@@ -83,8 +83,8 @@ class WalletDatabaseTest {
         walletDatabaseDao.insertCategory(category2)
 
         val expected = listOf(
-                WalletTestHelper.convertToCategoryType(category1),
-                WalletTestHelper.convertToCategoryType(category2)
+                Helper.convertToCategoryType(context, category1),
+                Helper.convertToCategoryType(context, category2)
         )
 
         val fromDb = walletDatabaseDao.getAllCategories().blockingValue
@@ -101,7 +101,7 @@ class WalletDatabaseTest {
         category.name = "Rent"
         walletDatabaseDao.updateCategory(category)
 
-        val expected = WalletTestHelper.convertToCategoryType(category)
+        val expected = Helper.convertToCategoryType(context, category)
         val fromDb = walletDatabaseDao.getCategory(category.id)
 
         Assert.assertEquals(expected, fromDb)
@@ -187,7 +187,7 @@ class WalletDatabaseTest {
         walletDatabaseDao.insertOperation(operation2)
 
         val expected = listOf(
-                WalletTestHelper.createCategoryWithOperations(category, operation1, operation2)
+                Helper.createCategoryWithOperations(category, operation1, operation2)
         )
 
         val fromDb = walletDatabaseDao.getCategoryWithAllOperations().blockingValue
@@ -195,26 +195,26 @@ class WalletDatabaseTest {
         Assert.assertEquals(expected, fromDb)
     }
 
-    class WalletTestHelper {
+    class Helper {
         companion object {
-            fun createArrayOfCategoryTypes(): Array<CategoryType> {
+            fun createArrayOfCategoryTypes(context: Context): Array<CategoryType> {
                 return arrayOf(
-                        CategoryType(1, "Income"),
-                        CategoryType(2, "Expense")
+                        createCategoryType(context, 1),
+                        createCategoryType(context, 2)
                 )
             }
 
             @Throws(IllegalArgumentException::class)
-            fun createCategoryType(id: Long): CategoryType {
+            fun createCategoryType(context: Context, id: Long): CategoryType {
                 return when (id) {
-                    1L -> CategoryType(1, "Income")
-                    2L -> CategoryType(2, "Expense")
+                    1L -> CategoryType(1, context.getString(R.string.category_type_income))
+                    2L -> CategoryType(2, context.getString(R.string.category_type_expense))
                     else -> throw IllegalArgumentException("Category type with id $id does not exists")
                 }
             }
 
-            fun convertToCategoryType(category: Category): CategoryWithType {
-                val categoryType = createCategoryType(category.typeId)
+            fun convertToCategoryType(context: Context, category: Category): CategoryWithType {
+                val categoryType = createCategoryType(context, category.typeId)
                 return CategoryWithType(category = category, type = categoryType)
             }
 
