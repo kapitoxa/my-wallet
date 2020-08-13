@@ -1,6 +1,5 @@
 package ru.kapitoxa.mywallet.categorydetail
 
-import androidx.lifecycle.ViewModel
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -10,6 +9,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
+import ru.kapitoxa.mywallet.DummyViewModel
 import ru.kapitoxa.mywallet.database.Category
 import ru.kapitoxa.mywallet.database.WalletDatabaseDao
 
@@ -43,6 +43,4 @@ class CategoryDetailViewModelFactoryTest {
     fun tryToCreateWrongViewModel() {
         factory.create(DummyViewModel::class.java)
     }
-
-    private class DummyViewModel : ViewModel()
 }
