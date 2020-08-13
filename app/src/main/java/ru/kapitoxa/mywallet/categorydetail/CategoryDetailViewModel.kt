@@ -60,9 +60,9 @@ class CategoryDetailViewModel(
                 } else {
                     update(category)
                 }
-                _showCategoryNameFieldError.value = false
-                _navigateToCategories.value = true
             }
+            _showCategoryNameFieldError.value = false
+            _navigateToCategories.value = true
         } else {
             _showCategoryNameFieldError.value = true
         }

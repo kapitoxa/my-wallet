@@ -8,10 +8,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.doNothing
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
@@ -52,8 +50,6 @@ class CategoryDetailViewModelTest {
         categoryTypeListLiveData.value = types
 
         `when`(database.getAllCategoryTypes()).thenReturn(categoryTypeListLiveData)
-        doNothing().`when`(database.insertCategory(ArgumentMatchers.any(Category::class.java)))
-        doNothing().`when`(database.updateCategory(ArgumentMatchers.any(Category::class.java)))
         viewModel = CategoryDetailViewModel(Category(), database)
 
         categoryLiveData = viewModel.category
@@ -92,13 +88,12 @@ class CategoryDetailViewModelTest {
     fun navigateAfterSave() {
         val category = categoryLiveData.value!!
         category.name = "Some name"
+        category.typeId = 1
 
         viewModel.onSave()
-
         Assert.assertTrue(navigateToCategoriesLiveData.value!!)
 
         viewModel.onNavigatedToCategories()
-
         Assert.assertFalse(navigateToCategoriesLiveData.value!!)
     }
 }
