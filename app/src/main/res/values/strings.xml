@@ -23,6 +23,9 @@
     <string name="operation_category_label">Категория</string>
     <string name="operation_action_save_label">Сохранить</string>
 
+    <string name="categories_action_create_label">Создать</string>
+    <string name="categories_action_content_description">Кнопка создания новой категории</string>
+
     <string name="category_edit_title">Редактирование категории</string>
     <string name="category_create_title">Создание категории</string>
     <string name="category_name_label">Название</string>
@@ -30,4 +33,7 @@
     <string name="category_action_save_label">Сохранить</string>
 
     <string name="input_field_is_not_filled">Поле не заполнено</string>
+
+    <string name="category_type_income">Доход</string>
+    <string name="category_type_expense">Расход</string>
 </resources>

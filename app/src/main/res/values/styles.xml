@@ -70,11 +70,14 @@
     <style name="MyTheme.DayNight.ItemSubtitle">
         <item name="android:textAppearance">@style/TextAppearance.MyTheme.Subtitle2</item>
         <item name="android:textColor">?colorOnBackground</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="MyTheme.DayNight.ItemTitle">
         <item name="android:textAppearance">@style/TextAppearance.MyTheme.Subtitle1</item>
         <item name="android:textStyle">bold</item>
+        <!--        <item name="android:textColor">?colorOnBackground</item>-->
     </style>
 
     <style name="Widget.MyTheme.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
@@ -82,6 +85,14 @@
         <item name="boxStrokeColor">?colorSecondary</item>
         <item name="hintTextColor">?colorSecondary</item>
         <item name="endIconTint">@color/end_icon_tint</item>
+    </style>
+
+    <style name="MyTheme.DayNight.LetterIcon">
+        <item name="android:layout_width">@dimen/item_image_size</item>
+        <item name="android:layout_height">@dimen/item_image_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
     <!--Bottom Sheets-->

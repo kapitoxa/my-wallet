@@ -37,7 +37,7 @@ interface WalletDatabaseDao {
 
     @Transaction
     @Query("select * from category order by id")
-    fun getAllCategories(): LiveData<List<CategoryWithType>>
+    fun getAllCategories(): List<CategoryWithType>
 
     @Transaction
     @Query("select * from category_type order by id")

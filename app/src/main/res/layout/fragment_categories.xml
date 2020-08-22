@@ -20,6 +20,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
@@ -33,12 +34,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
+            android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/keyLine_4"
-            android:onClick="@{() -> viewModel.navigateToCategoryDetail()}"
-            android:src="@drawable/ic_add_white_24dp" />
+            android:contentDescription="@string/categories_action_content_description"
+            android:onClick="@{() -> viewModel.onFabClicked()}"
+            android:text="@string/categories_action_create_label"
+            app:icon="@drawable/ic_add_white_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

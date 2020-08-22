@@ -80,4 +80,5 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$version_espresso_core"
     testImplementation "org.robolectric:robolectric:$version_robolectric"
     testImplementation "org.mockito:mockito-core:$version_mockito"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_coroutine_test"
 }

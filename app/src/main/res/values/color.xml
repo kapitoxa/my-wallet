@@ -54,11 +54,11 @@
     <!--on which they appear.-->
     <color name="color_on_primary">#FFFFFF</color>
     <color name="color_on_secondary">#ffffff</color>
-    <color name="color_on_background">#424242</color>
+    <color name="color_on_background">#707070</color>
     <color name="color_on_surface">#000000</color>
     <color name="color_on_error">#ffffff</color>
 
-    <color name="color_text_positive">#29BF12</color>
-    <color name="color_text_negative">#c41c00</color>
+    <color name="color_text_positive">#4eaa4b</color>
+    <color name="color_text_negative">#F52500</color>
 
 </resources>

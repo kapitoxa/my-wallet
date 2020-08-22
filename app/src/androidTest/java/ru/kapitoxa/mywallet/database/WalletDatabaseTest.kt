@@ -87,7 +87,7 @@ class WalletDatabaseTest {
                 Helper.convertToCategoryType(context, category2)
         )
 
-        val fromDb = walletDatabaseDao.getAllCategories().blockingValue
+        val fromDb = walletDatabaseDao.getAllCategories()
 
         Assert.assertEquals(expected, fromDb)
     }

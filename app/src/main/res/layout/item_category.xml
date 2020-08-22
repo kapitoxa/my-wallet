@@ -1,29 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/keyLine_4">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textView"
-        style="@style/MyTheme.DayNight.ItemTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Зарплата" />
+    <data>
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/MyTheme.DayNight.ItemSubtitle"
-        android:layout_width="0dp"
+        <variable
+            name="categoryWithType"
+            type="ru.kapitoxa.mywallet.database.CategoryWithType" />
+
+        <variable
+            name="clickListener"
+            type="ru.kapitoxa.mywallet.categories.CategoriesListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/keyLine_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="Доход" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:clickable="true"
+        android:onClick="@{() -> clickListener.onClick(categoryWithType.category)}"
+        android:paddingStart="@dimen/keyLine_4"
+        android:paddingTop="@dimen/keyLine_4"
+        android:paddingEnd="@dimen/keyLine_4"
+        android:paddingBottom="@dimen/keyLine_4">
+
+        <TextView
+            android:id="@+id/icon"
+            style="@style/MyTheme.DayNight.LetterIcon"
+            app:iconLetterBackground="@{categoryWithType}"
+            app:iconLetterText="@{categoryWithType}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/ic_shape_oval"
+            tools:text="З" />
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/MyTheme.DayNight.ItemTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyLine_4"
+            android:text="@{categoryWithType.category.name}"
+            app:layout_constraintBottom_toTopOf="@+id/type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            tools:text="Зарплата" />
+
+        <TextView
+            android:id="@+id/type"
+            style="@style/MyTheme.DayNight.ItemSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyLine_4"
+            android:text="@{categoryWithType.type.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="Доход" />
+
+        <!--        app:categoryTypeColor="@{categoryWithType}"-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -21,4 +21,5 @@
     <dimen name="alpha_emphasis_disabled">@dimen/material_emphasis_disabled</dimen>
 
     <dimen name="transaction_image_size">56dp</dimen>
+    <dimen name="item_image_size">48dp</dimen>
 </resources>
