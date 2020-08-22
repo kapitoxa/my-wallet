@@ -1,21 +1,21 @@
 package ru.kapitoxa.mywallet.categorydetail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.*
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.kapitoxa.mywallet.database.Category
 import ru.kapitoxa.mywallet.database.CategoryType
 import ru.kapitoxa.mywallet.database.WalletDatabaseDao
 
 class CategoryDetailViewModel(
         category: Category,
-        private val database: WalletDatabaseDao) : ViewModel() {
-
-    private var viewModelJob = Job()
-
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+        private val database: WalletDatabaseDao,
+        private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO) : ViewModel() {
 
     private val _category = MutableLiveData<Category>()
     val category: MutableLiveData<Category>
@@ -37,13 +37,7 @@ class CategoryDetailViewModel(
         _category.value = category
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
     fun onTypeChanged(typeId: Long, isChecked: Boolean) {
-        Log.i("CategoryDetailViewModel", "State of type $typeId is changed to $isChecked")
         val category = _category.value!!
 
         if (isChecked && typeId != category.typeId) {
@@ -53,16 +47,16 @@ class CategoryDetailViewModel(
 
     fun onSave() {
         if (isValid()) {
-            uiScope.launch {
+            viewModelScope.launch {
                 val category = _category.value ?: return@launch
                 if (category.id == 0L) {
                     insert(category)
                 } else {
                     update(category)
                 }
+                _showCategoryNameFieldError.value = false
+                _navigateToCategories.value = true
             }
-            _showCategoryNameFieldError.value = false
-            _navigateToCategories.value = true
         } else {
             _showCategoryNameFieldError.value = true
         }
@@ -78,13 +72,13 @@ class CategoryDetailViewModel(
     }
 
     private suspend fun insert(category: Category) {
-        withContext(Dispatchers.IO) {
+        withContext(defaultDispatcher) {
             database.insertCategory(category)
         }
     }
 
     private suspend fun update(category: Category) {
-        withContext(Dispatchers.IO) {
+        withContext(defaultDispatcher) {
             database.updateCategory(category)
         }
     }

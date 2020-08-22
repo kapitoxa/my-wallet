@@ -1,8 +1,8 @@
 package ru.kapitoxa.mywallet.categorydetail
 
-import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -13,13 +13,13 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
+import ru.kapitoxa.mywallet.MainCoroutineRule
 import ru.kapitoxa.mywallet.database.Category
 import ru.kapitoxa.mywallet.database.CategoryType
 import ru.kapitoxa.mywallet.database.WalletDatabaseDao
 
+@ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.P])
 class CategoryDetailViewModelTest {
     private lateinit var viewModel: CategoryDetailViewModel
 
@@ -38,6 +38,9 @@ class CategoryDetailViewModelTest {
 
     private val categoryTypeListLiveData: MutableLiveData<List<CategoryType>> = MutableLiveData()
 
+    @get:Rule
+    val mainCoroutineRule = MainCoroutineRule()
+
     @Mock
     private lateinit var database: WalletDatabaseDao
 
@@ -50,7 +53,7 @@ class CategoryDetailViewModelTest {
         categoryTypeListLiveData.value = types
 
         `when`(database.getAllCategoryTypes()).thenReturn(categoryTypeListLiveData)
-        viewModel = CategoryDetailViewModel(Category(), database)
+        viewModel = CategoryDetailViewModel(Category(), database, mainCoroutineRule.testDispatcher)
 
         categoryLiveData = viewModel.category
         categoryTypeLiveData = viewModel.types
