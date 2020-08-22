@@ -71,7 +71,7 @@ class CategoryDetailFragment : Fragment() {
             }
         })
 
-        viewModel.showCategoryNameFieldError.observe(viewLifecycleOwner, Observer { show ->
+        viewModel.showCategoryNameFieldError.observe(viewLifecycleOwner, { show ->
             if (show) {
                 binding.categoryNameLayout.error = getString(R.string.input_field_is_not_filled)
             } else {
@@ -79,7 +79,7 @@ class CategoryDetailFragment : Fragment() {
             }
         })
 
-        viewModel.navigateToCategories.observe(viewLifecycleOwner, Observer { navigate ->
+        viewModel.navigateToCategories.observe(viewLifecycleOwner, { navigate ->
             if (navigate) {
                 this.findNavController().navigate(CategoryDetailFragmentDirections
                         .actionCategoryDetailFragmentToCategoriesFragment())

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.kapitoxa.mywallet.ExtendedFabOnScrollListener
@@ -35,13 +34,13 @@ class CategoriesFragment : Fragment() {
         binding.categoryList.adapter = adapter
         binding.categoryList.addOnScrollListener(ExtendedFabOnScrollListener(binding.fab))
 
-        viewModel.categories.observe(viewLifecycleOwner, Observer {
+        viewModel.categories.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.submitList(it)
             }
         })
 
-        viewModel.navigateToCategoryDetail.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToCategoryDetail.observe(viewLifecycleOwner, {
             it?.let {
                 this.findNavController().navigate(
                         CategoriesFragmentDirections

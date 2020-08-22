@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.kapitoxa.mywallet.databinding.FragmentOperationsBinding
@@ -22,7 +21,7 @@ class OperationsFragment : Fragment() {
         val viewModel = ViewModelProvider(this).get(OperationsViewModel::class.java)
         binding.viewModel = viewModel
 
-        viewModel.navigateToOperationDetail.observe(viewLifecycleOwner, Observer { navigate ->
+        viewModel.navigateToOperationDetail.observe(viewLifecycleOwner, { navigate ->
             if (navigate) {
                 this.findNavController().navigate(
                         OperationsFragmentDirections.actionOperationsFragmentToDetailFragment())
