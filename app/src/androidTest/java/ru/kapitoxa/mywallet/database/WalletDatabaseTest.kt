@@ -28,7 +28,7 @@ class WalletDatabaseTest {
 
     @Before
     fun createAndPrePopulateDb() {
-        context = ApplicationProvider.getApplicationContext<Context>()
+        context = ApplicationProvider.getApplicationContext()
         database = Room.inMemoryDatabaseBuilder(context, WalletDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
