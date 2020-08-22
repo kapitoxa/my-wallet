@@ -8,4 +8,4 @@ import ru.kapitoxa.mywallet.database.WalletDatabaseTest
 @Suite.SuiteClasses(
         WalletDatabaseTest::class
 )
-class IntegrationTestSuite
+class InstrumentedTestSuite
