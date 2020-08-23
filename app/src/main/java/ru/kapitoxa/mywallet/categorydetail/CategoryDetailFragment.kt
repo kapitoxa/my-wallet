@@ -66,8 +66,13 @@ class CategoryDetailFragment : Fragment() {
                     chipGroup.addView(chip)
                 }
 
-                val firstChild = chipGroup.getChildAt(0) as Chip
-                firstChild.isChecked = true
+                val checkedChipIndex = when (category.id) {
+                    0L -> 0
+                    else -> category.typeId.toInt() - 1
+                }
+
+                val checkedChip = chipGroup.getChildAt(checkedChipIndex) as Chip
+                checkedChip.isChecked = true
             }
         })
 
