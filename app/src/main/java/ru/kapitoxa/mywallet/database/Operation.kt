@@ -17,11 +17,11 @@ data class Operation(
         @PrimaryKey(autoGenerate = true)
         var id: Long = 0L,
 
-        var name: String,
+        var name: String = "",
 
         @ColumnInfo(name = "operation_date")
-        var operationDate: Long,
+        var operationDate: Long = 0L,
 
         @ColumnInfo(name = "category_id")
-        var categoryId: Long
+        var categoryId: Long = 0L
 )
