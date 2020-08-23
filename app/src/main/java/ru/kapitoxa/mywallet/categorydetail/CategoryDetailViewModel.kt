@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import ru.kapitoxa.mywallet.database.Category
-import ru.kapitoxa.mywallet.database.CategoryType
 import ru.kapitoxa.mywallet.database.WalletDatabaseDao
 
 class CategoryDetailViewModel(
@@ -21,9 +19,7 @@ class CategoryDetailViewModel(
     val category: MutableLiveData<Category>
         get() = _category
 
-    private val _types = database.getAllCategoryTypes()
-    val types: LiveData<List<CategoryType>>
-        get() = _types
+    val types = database.getAllCategoryTypes()
 
     private val _showCategoryNameFieldError = MutableLiveData<Boolean>()
     val showCategoryNameFieldError: LiveData<Boolean>
@@ -47,16 +43,16 @@ class CategoryDetailViewModel(
 
     fun onSave() {
         if (isValid()) {
-            viewModelScope.launch {
+            viewModelScope.launch(defaultDispatcher) {
                 val category = _category.value ?: return@launch
                 if (category.id == 0L) {
-                    insert(category)
+                    database.insertCategory(category)
                 } else {
-                    update(category)
+                    database.updateCategory(category)
                 }
-                _showCategoryNameFieldError.value = false
-                _navigateToCategories.value = true
             }
+            _showCategoryNameFieldError.value = false
+            _navigateToCategories.value = true
         } else {
             _showCategoryNameFieldError.value = true
         }
@@ -69,17 +65,5 @@ class CategoryDetailViewModel(
     private fun isValid(): Boolean {
         val category = _category.value!!
         return category.name.isNotEmpty() && category.typeId > 0
-    }
-
-    private suspend fun insert(category: Category) {
-        withContext(defaultDispatcher) {
-            database.insertCategory(category)
-        }
-    }
-
-    private suspend fun update(category: Category) {
-        withContext(defaultDispatcher) {
-            database.updateCategory(category)
-        }
     }
 }

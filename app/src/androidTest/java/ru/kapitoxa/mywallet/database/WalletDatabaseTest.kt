@@ -9,13 +9,13 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import ru.kapitoxa.mywallet.R
-import java.io.IOException
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
@@ -27,7 +27,7 @@ class WalletDatabaseTest {
     private lateinit var context: Context
 
     @Before
-    fun createAndPrePopulateDb() {
+    fun createAndPrePopulateDb() = runBlocking {
         context = ApplicationProvider.getApplicationContext()
         database = Room.inMemoryDatabaseBuilder(context, WalletDatabase::class.java)
                 .allowMainThreadQueries()
@@ -38,14 +38,12 @@ class WalletDatabaseTest {
     }
 
     @After
-    @Throws(IOException::class)
     fun closeDb() {
         database.close()
     }
 
     @Test
-    @Throws(Exception::class)
-    fun readCategoryType() {
+    fun readCategoryType() = runBlocking {
         val expected = Helper.createCategoryType(context, 1L)
         val fromDb = walletDatabaseDao.getCategoryType(expected.id)
 
@@ -53,8 +51,7 @@ class WalletDatabaseTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun readAllCategoryTypes() {
+    fun readAllCategoryTypes() = runBlocking {
         val types = Helper.createArrayOfCategoryTypes(context)
         val fromDb = walletDatabaseDao.getAllCategoryTypes().blockingValue
 
@@ -62,8 +59,7 @@ class WalletDatabaseTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun writeAndReadCategory() {
+    fun writeAndReadCategory() = runBlocking {
         val category = Category(1, "Food", 2)
         val expected = Helper.convertToCategoryType(context, category)
 
@@ -74,8 +70,7 @@ class WalletDatabaseTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun writeAndReadAllCategories() {
+    fun writeAndReadAllCategories() = runBlocking {
         val category1 = Category(1, "Food", 2)
         val category2 = Category(2, "Salary", 1)
 
@@ -87,14 +82,13 @@ class WalletDatabaseTest {
                 Helper.convertToCategoryType(context, category2)
         )
 
-        val fromDb = walletDatabaseDao.getAllCategories()
+        val fromDb = walletDatabaseDao.getAllCategories().blockingValue
 
         Assert.assertEquals(expected, fromDb)
     }
 
     @Test
-    @Throws(Exception::class)
-    fun updateCategory() {
+    fun updateCategory() = runBlocking {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 
@@ -108,22 +102,19 @@ class WalletDatabaseTest {
     }
 
     @Test(expected = SQLiteConstraintException::class)
-    @Throws(Exception::class)
-    fun writeCategoryWithNonExistingType() {
+    fun writeCategoryWithNonExistingType() = runBlocking {
         val category = Category(1, "Food", 3)
         walletDatabaseDao.insertCategory(category)
     }
 
     @Test(expected = SQLiteConstraintException::class)
-    @Throws(Exception::class)
-    fun writeOperationWithNonExistingCategory() {
+    fun writeOperationWithNonExistingCategory() = runBlocking {
         val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(), 1)
         walletDatabaseDao.insertOperation(operation)
     }
 
     @Test
-    @Throws(Exception::class)
-    fun writeAndReadOperation() {
+    fun writeAndReadOperation() = runBlocking {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 
@@ -136,8 +127,7 @@ class WalletDatabaseTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun updateOperation() {
+    fun updateOperation() = runBlocking {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 
@@ -153,8 +143,7 @@ class WalletDatabaseTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun writeAndReadAllOperations() {
+    fun writeAndReadAllOperations() = runBlocking {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 
@@ -175,8 +164,7 @@ class WalletDatabaseTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun writeAndReadCategoryWithAllOperations() {
+    fun writeAndReadCategoryWithAllOperations() = runBlocking {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 

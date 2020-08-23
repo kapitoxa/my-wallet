@@ -5,6 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
 import ru.kapitoxa.mywallet.R
 import java.util.concurrent.Executors
 
@@ -48,14 +51,17 @@ abstract class WalletDatabase : RoomDatabase() {
             fun onCreate(context: Context) = object : Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-                    Executors.newSingleThreadScheduledExecutor().execute {
-                        val dao = getInstance(context).walletDatabaseDao
-                        populate(context, dao)
+                    INSTANCE?.let {
+                        val scope = CoroutineScope(Executors.newSingleThreadScheduledExecutor()
+                                .asCoroutineDispatcher())
+                        scope.launch {
+                            populate(context, it.walletDatabaseDao)
+                        }
                     }
                 }
             }
 
-            fun populate(context: Context, database: WalletDatabaseDao) {
+            suspend fun populate(context: Context, database: WalletDatabaseDao) {
                 database.insertAllCategoryTypes(
                         CategoryType(name = context.getString(R.string.category_type_income)),
                         CategoryType(name = context.getString(R.string.category_type_expense))

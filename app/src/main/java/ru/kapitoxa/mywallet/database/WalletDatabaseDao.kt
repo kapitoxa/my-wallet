@@ -7,37 +7,37 @@ import androidx.room.*
 interface WalletDatabaseDao {
 
     @Insert
-    fun insertCategoryType(type: CategoryType)
+    suspend fun insertCategoryType(type: CategoryType)
 
     @Insert
-    fun insertAllCategoryTypes(vararg type: CategoryType)
+    suspend fun insertAllCategoryTypes(vararg type: CategoryType)
 
     @Insert
-    fun insertCategory(category: Category)
+    suspend fun insertCategory(category: Category)
 
     @Update
-    fun updateCategory(category: Category)
+    suspend fun updateCategory(category: Category)
 
     @Insert
-    fun insertOperation(operation: Operation)
+    suspend fun insertOperation(operation: Operation)
 
     @Update
-    fun updateOperation(operation: Operation)
+    suspend fun updateOperation(operation: Operation)
 
     @Query("select * from category_type where id = :key")
-    fun getCategoryType(key: Long): CategoryType?
+    suspend fun getCategoryType(key: Long): CategoryType?
 
     @Transaction
     @Query("select * from category where id = :key")
-    fun getCategory(key: Long): CategoryWithType?
+    suspend fun getCategory(key: Long): CategoryWithType?
 
     @Transaction
     @Query("select * from operation where id = :key")
-    fun getOperation(key: Long): Operation?
+    suspend fun getOperation(key: Long): Operation?
 
     @Transaction
     @Query("select * from category order by id")
-    fun getAllCategories(): List<CategoryWithType>
+    fun getAllCategories(): LiveData<List<CategoryWithType>>
 
     @Transaction
     @Query("select * from category_type order by id")

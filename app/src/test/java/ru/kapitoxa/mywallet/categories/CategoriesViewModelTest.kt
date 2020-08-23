@@ -1,6 +1,7 @@
 package ru.kapitoxa.mywallet.categories
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert
 import org.junit.Before
@@ -12,12 +13,10 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
-import ru.kapitoxa.mywallet.MainCoroutineRule
 import ru.kapitoxa.mywallet.database.Category
 import ru.kapitoxa.mywallet.database.CategoryType
 import ru.kapitoxa.mywallet.database.CategoryWithType
 import ru.kapitoxa.mywallet.database.WalletDatabaseDao
-import ru.kapitoxa.mywallet.runBlockingTest
 
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
@@ -27,6 +26,8 @@ class CategoriesViewModelTest {
     private lateinit var categoriesLiveData: LiveData<List<CategoryWithType>>
 
     private lateinit var navigateToCategoryDetailLiveData: LiveData<Category?>
+
+    private val categoriesWithTypeLiveData: MutableLiveData<List<CategoryWithType>> = MutableLiveData()
 
     private val categoriesWithTypeList = listOf(
             CategoryWithType(
@@ -39,9 +40,6 @@ class CategoriesViewModelTest {
             )
     )
 
-    @get:Rule
-    val mainCoroutineRule = MainCoroutineRule()
-
     @Mock
     private lateinit var database: WalletDatabaseDao
 
@@ -51,15 +49,16 @@ class CategoriesViewModelTest {
 
     @Before
     fun setUp() {
-        `when`(database.getAllCategories()).thenReturn(categoriesWithTypeList)
+        categoriesWithTypeLiveData.value = categoriesWithTypeList
+        `when`(database.getAllCategories()).thenReturn(categoriesWithTypeLiveData)
 
-        viewModel = CategoriesViewModel(database, mainCoroutineRule.testDispatcher)
+        viewModel = CategoriesViewModel(database)
         categoriesLiveData = viewModel.categories
         navigateToCategoryDetailLiveData = viewModel.navigateToCategoryDetail
     }
 
     @Test
-    fun fillListOnInitialization() = mainCoroutineRule.runBlockingTest {
+    fun fillListOnInitialization() {
         Assert.assertEquals(categoriesWithTypeList, categoriesLiveData.value)
     }
 

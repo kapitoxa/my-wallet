@@ -25,7 +25,7 @@ class CategoryDetailViewModelTest {
 
     private lateinit var categoryLiveData: LiveData<Category>
 
-    private lateinit var categoryTypeLiveData: LiveData<List<CategoryType>>
+    private lateinit var typesLiveData: LiveData<List<CategoryType>>
 
     private lateinit var showCategoryNameFieldErrorLiveData: LiveData<Boolean>
 
@@ -56,9 +56,14 @@ class CategoryDetailViewModelTest {
         viewModel = CategoryDetailViewModel(Category(), database, mainCoroutineRule.testDispatcher)
 
         categoryLiveData = viewModel.category
-        categoryTypeLiveData = viewModel.types
+        typesLiveData = viewModel.types
         showCategoryNameFieldErrorLiveData = viewModel.showCategoryNameFieldError
         navigateToCategoriesLiveData = viewModel.navigateToCategories
+    }
+
+    @Test
+    fun fillTypesOnInitialization() {
+        Assert.assertEquals(types, typesLiveData.value)
     }
 
     @Test
