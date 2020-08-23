@@ -35,10 +35,11 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.operationDetailFragment
                     || destination.id == R.id.categoryDetailFragment) {
                 toolbar.setHomeAsUpIndicator(R.drawable.ic_baseline_close_24)
-                toolbar.elevation = 0F
+                toolbar.elevation = resources.getDimension(R.dimen.toolbar_no_elevation)
                 toolbar.title = null
             } else {
                 toolbar.setIcon(R.drawable.ic_baseline_arrow_back_24)
+                toolbar.elevation = resources.getDimension(R.dimen.toolbar_standard_elevation)
             }
         }
     }

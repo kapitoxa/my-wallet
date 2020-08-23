@@ -22,4 +22,7 @@
 
     <dimen name="transaction_image_size">56dp</dimen>
     <dimen name="item_image_size">48dp</dimen>
+
+    <dimen name="toolbar_standard_elevation">4dp</dimen>
+    <dimen name="toolbar_no_elevation">0dp</dimen>
 </resources>
