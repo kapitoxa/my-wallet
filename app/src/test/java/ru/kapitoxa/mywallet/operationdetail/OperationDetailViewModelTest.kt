@@ -12,6 +12,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
+import ru.kapitoxa.mywallet.blockingValue
 import ru.kapitoxa.mywallet.database.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -22,6 +23,10 @@ class OperationDetailViewModelTest {
     private lateinit var operationLiveData: LiveData<Operation>
 
     private lateinit var categoriesLiveData: LiveData<List<CategoryWithType>>
+
+    private lateinit var operationDateLiveData: LiveData<String?>
+
+    private lateinit var showDatePickerDialogLiveData: LiveData<Boolean>
 
     @Mock
     private lateinit var database: WalletDatabaseDao
@@ -51,16 +56,51 @@ class OperationDetailViewModelTest {
 
         operationLiveData = viewModel.operation
         categoriesLiveData = viewModel.categories
+        operationDateLiveData = viewModel.operationDate
+        showDatePickerDialogLiveData = viewModel.showDatePickerDialog
     }
 
     @Test
     fun initWithEmptyCategory() {
         val expected = Operation()
         Assert.assertEquals(expected, operationLiveData.value)
+        Assert.assertNull(operationDateLiveData.value)
     }
 
     @Test
     fun categoriesInitialization() {
         Assert.assertEquals(categoriesWithTypeList, categoriesLiveData.value)
+    }
+
+    fun setDefaultOperationDate() {
+        val timestamp = 0L
+        viewModel.setOperationDate(timestamp)
+
+        Assert.assertNull("Operation date LiveData not updated",
+                operationDateLiveData.blockingValue)
+        Assert.assertEquals("Operation not updated",
+                timestamp, operationLiveData.value!!.operationDate)
+    }
+
+    @Test
+    fun setOperationDate() {
+        val timestamp = 1598227200000L
+        viewModel.setOperationDate(timestamp)
+
+        Assert.assertEquals("Operation date LiveData not updated",
+                "Aug 24, 2020",
+                operationDateLiveData.blockingValue)
+
+        Assert.assertEquals("Operation not updated",
+                timestamp, operationLiveData.value!!.operationDate)
+    }
+
+    @Test
+    fun showDatePicker() {
+        viewModel.onOperationDateClicked()
+        Assert.assertTrue(showDatePickerDialogLiveData.value!!)
+
+        viewModel.onShowedDatePickerDialog()
+        Assert.assertFalse(showDatePickerDialogLiveData.value!!)
     }
 }

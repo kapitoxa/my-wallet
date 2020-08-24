@@ -71,8 +71,11 @@
                     style="@style/Widget.MyTheme.EditText.OnPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusableInTouchMode="false"
                     android:hint="@string/operation_date_label"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:onClick="@{() -> viewModel.onOperationDateClicked()}"
+                    android:text="@{viewModel.operationDate}" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

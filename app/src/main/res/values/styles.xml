@@ -19,9 +19,6 @@
     <!--Components-->
     <style name="Widget.MyTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">?colorOnPrimary</item>
-        <item name="boxStrokeColor">?colorSecondary</item>
-        <item name="hintTextColor">?colorSecondary</item>
-        <item name="endIconTint">@color/filled_icon_tint</item>
     </style>
 
     <style name="Widget.MyTheme.TextInputLayout.PrimaryColor" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">

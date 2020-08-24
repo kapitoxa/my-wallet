@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
+import com.google.android.material.datepicker.MaterialDatePicker
 import ru.kapitoxa.mywallet.R
 import ru.kapitoxa.mywallet.database.CategoryWithType
 import ru.kapitoxa.mywallet.database.Operation
@@ -78,6 +79,23 @@ class OperationDetailFragment : Fragment() {
 
                 val checkedChip = chipGroup.getChildAt(checkedChipIndex) as Chip
                 checkedChip.isChecked = true
+            }
+        })
+
+        viewModel.showDatePickerDialog.observe(viewLifecycleOwner, { show ->
+            if (show) {
+                val picker = MaterialDatePicker.Builder.datePicker()
+                        .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
+                        .setTitleText(R.string.operation_date_label)
+                        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                        .build()
+
+                picker.addOnPositiveButtonClickListener {
+                    viewModel.setOperationDate(it)
+                }
+
+                picker.show(childFragmentManager, picker.toString())
+                viewModel.onShowedDatePickerDialog()
             }
         })
     }
