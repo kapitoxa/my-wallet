@@ -63,6 +63,9 @@ class OperationDetailFragment : Fragment() {
                     val chip = chipInflater.inflate(R.layout.chip, chipGroup, false) as Chip
                     chip.text = it.category.name
                     chip.tag = it.category.id
+                    chip.setOnCheckedChangeListener { button, isChecked ->
+                        viewModel.onCategoryChecked(button.tag as Long, isChecked)
+                    }
                     chip
                 }
 

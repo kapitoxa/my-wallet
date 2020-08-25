@@ -103,4 +103,16 @@ class OperationDetailViewModelTest {
         viewModel.onShowedDatePickerDialog()
         Assert.assertFalse(showDatePickerDialogLiveData.value!!)
     }
+
+    @Test
+    fun checkCategory() {
+        viewModel.onCategoryChecked(1, true)
+        Assert.assertEquals(1, operationLiveData.value!!.categoryId)
+
+        viewModel.onCategoryChecked(2, true)
+        Assert.assertEquals(2, operationLiveData.value!!.categoryId)
+
+        viewModel.onCategoryChecked(1, false)
+        Assert.assertEquals(2, operationLiveData.value!!.categoryId)
+    }
 }

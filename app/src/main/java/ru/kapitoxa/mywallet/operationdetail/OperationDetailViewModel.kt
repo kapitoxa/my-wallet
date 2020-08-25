@@ -1,5 +1,6 @@
 package ru.kapitoxa.mywallet.operationdetail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -50,5 +51,14 @@ class OperationDetailViewModel(
 
     fun onShowedDatePickerDialog() {
         _showDatePickerDialog.value = false
+    }
+
+    fun onCategoryChecked(categoryId: Long, isChecked: Boolean) {
+        Log.i("OperationDetailViewModel", "Category chip $categoryId change state to $isChecked")
+        val operation = _operation.value!!
+
+        if (isChecked && operation.categoryId != categoryId) {
+            operation.categoryId = categoryId
+        }
     }
 }
