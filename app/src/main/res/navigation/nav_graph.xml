@@ -17,7 +17,17 @@
         android:id="@+id/operationDetailFragment"
         android:name="ru.kapitoxa.mywallet.operationdetail.OperationDetailFragment"
         android:label="@string/fragment_operation_detail_label"
-        tools:layout="@layout/fragment_operation_detail" />
+        tools:layout="@layout/fragment_operation_detail">
+        <action
+            android:id="@+id/action_operationDetailFragment_to_operationsFragment"
+            app:destination="@id/operationsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/operationsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/categoryDetailFragment"
         android:name="ru.kapitoxa.mywallet.categorydetail.CategoryDetailFragment"

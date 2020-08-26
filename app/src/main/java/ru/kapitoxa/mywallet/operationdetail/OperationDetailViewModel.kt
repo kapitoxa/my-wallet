@@ -1,10 +1,9 @@
 package ru.kapitoxa.mywallet.operationdetail
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.kapitoxa.mywallet.database.Operation
 import ru.kapitoxa.mywallet.database.WalletDatabaseDao
 import java.text.DateFormat
@@ -12,7 +11,8 @@ import java.util.*
 
 class OperationDetailViewModel(
         operation: Operation,
-        database: WalletDatabaseDao,
+        private val database: WalletDatabaseDao,
+        private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val _operation = MutableLiveData<Operation>()
@@ -32,6 +32,18 @@ class OperationDetailViewModel(
     private val _showDatePickerDialog = MutableLiveData<Boolean>()
     val showDatePickerDialog: LiveData<Boolean>
         get() = _showDatePickerDialog
+
+    private val _showOperationNameFieldError = MutableLiveData<Boolean>()
+    val showOperationNameFieldError: LiveData<Boolean>
+        get() = _showOperationNameFieldError
+
+    private val _showOperationDateFieldError = MutableLiveData<Boolean>()
+    val showOperationDateFieldError: LiveData<Boolean>
+        get() = _showOperationDateFieldError
+
+    private val _navigateToOperations = MutableLiveData<Boolean>()
+    val navigateToOperations: LiveData<Boolean>
+        get() = _navigateToOperations
 
     init {
         _operation.value = operation
@@ -54,11 +66,57 @@ class OperationDetailViewModel(
     }
 
     fun onCategoryChecked(categoryId: Long, isChecked: Boolean) {
-        Log.i("OperationDetailViewModel", "Category chip $categoryId change state to $isChecked")
         val operation = _operation.value!!
 
         if (isChecked && operation.categoryId != categoryId) {
             operation.categoryId = categoryId
+        }
+    }
+
+    fun onSave() {
+        val operation = operation.value!!
+
+        if (operation.isValid()) {
+            viewModelScope.launch(defaultDispatcher) {
+                operation.store()
+            }
+            _navigateToOperations.value = true
+        }
+    }
+
+    fun onNavigatedToOperations() {
+        _navigateToOperations.value = false
+    }
+
+    private fun Operation.isValid(): Boolean {
+        var valid = true
+
+        if (name.isEmpty()) {
+            _showOperationNameFieldError.value = true
+            valid = false
+        } else {
+            _showOperationNameFieldError.value = false
+        }
+
+        if (operationDate == 0L) {
+            _showOperationDateFieldError.value = true
+            valid = false
+        } else {
+            _showOperationDateFieldError.value = false
+        }
+
+        if (categoryId == 0L) {
+            valid = false
+        }
+
+        return valid
+    }
+
+    private suspend fun Operation.store() {
+        if (id == 0L) {
+            database.insertOperation(this)
+        } else {
+            database.updateOperation(this)
         }
     }
 }

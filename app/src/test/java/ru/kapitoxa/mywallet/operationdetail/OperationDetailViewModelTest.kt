@@ -28,6 +28,12 @@ class OperationDetailViewModelTest {
 
     private lateinit var showDatePickerDialogLiveData: LiveData<Boolean>
 
+    private lateinit var showOperationNameFieldErrorLiveData: LiveData<Boolean>
+
+    private lateinit var showOperationDateFieldErrorLiveData: LiveData<Boolean>
+
+    private lateinit var navigateToOperationsLiveData: LiveData<Boolean>
+
     @Mock
     private lateinit var database: WalletDatabaseDao
 
@@ -58,6 +64,9 @@ class OperationDetailViewModelTest {
         categoriesLiveData = viewModel.categories
         operationDateLiveData = viewModel.operationDate
         showDatePickerDialogLiveData = viewModel.showDatePickerDialog
+        showOperationNameFieldErrorLiveData = viewModel.showOperationNameFieldError
+        showOperationDateFieldErrorLiveData = viewModel.showOperationDateFieldError
+        navigateToOperationsLiveData = viewModel.navigateToOperations
     }
 
     @Test
@@ -114,5 +123,41 @@ class OperationDetailViewModelTest {
 
         viewModel.onCategoryChecked(1, false)
         Assert.assertEquals(2, operationLiveData.value!!.categoryId)
+    }
+
+    @Test
+    fun `success saving and navigate to operations`() {
+        val operation = operationLiveData.value!!
+        operation.name = "Some operation"
+        operation.operationDate = 1598227200000L
+        operation.categoryId = 1L
+
+        viewModel.onSave()
+
+        Assert.assertFalse("The error is displayed in the field Name",
+                showOperationNameFieldErrorLiveData.value!!)
+        Assert.assertFalse("The error is displayed in the field OperationData",
+                showOperationDateFieldErrorLiveData.value!!)
+        Assert.assertTrue("Navigation is not triggered",
+                navigateToOperationsLiveData.value!!)
+
+        viewModel.onNavigatedToOperations()
+
+        Assert.assertFalse("Navigation in not canceled",
+                navigateToOperationsLiveData.value!!)
+    }
+
+    @Test
+    fun `show errors on save empty operation`() {
+        operationLiveData.value!!
+
+        viewModel.onSave()
+
+        Assert.assertTrue("The error is not displayed in the field Name",
+                showOperationNameFieldErrorLiveData.value!!)
+        Assert.assertTrue("The error is not displayed in the field OperationDate",
+                showOperationDateFieldErrorLiveData.value!!)
+        Assert.assertEquals("Navigation is triggered",
+                null, navigateToOperationsLiveData.value)
     }
 }

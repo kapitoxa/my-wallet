@@ -18,7 +18,16 @@
 
     <!--Components-->
     <style name="Widget.MyTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="boxBackgroundColor">?colorOnPrimary</item>
+        <item name="boxBackgroundColor">?colorSurface</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.MyTheme.TextInputEditText</item>
+    </style>
+
+    <style name="ThemeOverlay.MyTheme.TextInputEditText" parent="@style/ThemeOverlay.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="editTextStyle">@style/Widget.MyTheme.EditText</item>
+    </style>
+
+    <style name="Widget.MyTheme.EditText" parent="@style/Widget.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:textColor">?colorOnBackground</item>
     </style>
 
     <style name="Widget.MyTheme.TextInputLayout.PrimaryColor" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">

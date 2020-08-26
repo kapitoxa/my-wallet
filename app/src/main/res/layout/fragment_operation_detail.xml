@@ -7,118 +7,143 @@
         <variable
             name="viewModel"
             type="ru.kapitoxa.mywallet.operationdetail.OperationDetailViewModel" />
+
+        <variable
+            name="onTextChanged"
+            type="androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/top_layout"
-            style="@style/MyTheme.DayNight.FormTopContainer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside"
-            app:layout_constraintVertical_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/title_text"
-                style="@style/MyTheme.DayNight.FormTopTitle.OnPrimary"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top_layout"
+                style="@style/MyTheme.DayNight.FormTopContainer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/operation_title"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                app:layout_constraintVertical_weight="1">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/detail_title_layout"
-                style="@style/Widget.MyTheme.TextInputLayout.PrimaryColor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/keyLine_5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/detail_title"
-                    style="@style/Widget.MyTheme.EditText.OnPrimary"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/title_text"
+                    style="@style/MyTheme.DayNight.FormTopTitle.OnPrimary"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/operation_name_label"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="@string/operation_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/detail_date_layout"
-                style="@style/Widget.MyTheme.TextInputLayout.PrimaryColor"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/keyLine_4"
-                app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
-                app:endIconMode="custom"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_title_layout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/detail_date"
-                    style="@style/Widget.MyTheme.EditText.OnPrimary"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/detail_title_layout"
+                    style="@style/Widget.MyTheme.TextInputLayout.PrimaryColor"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:focusableInTouchMode="false"
-                    android:hint="@string/operation_date_label"
-                    android:inputType="date"
-                    android:onClick="@{() -> viewModel.onOperationDateClicked()}"
-                    android:text="@{viewModel.operationDate}" />
+                    android:layout_marginTop="@dimen/keyLine_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_text">
 
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/detail_title"
+                        style="@style/Widget.MyTheme.EditText.OnPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/operation_name_label"
+                        android:inputType="text"
+                        android:text="@={viewModel.operation.name}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/bottom_layout"
-            style="@style/MyTheme.DayNight.FormBottomContainer"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_layout"
-            app:layout_constraintVertical_weight="1">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/detail_date_layout"
+                    style="@style/Widget.MyTheme.TextInputLayout.PrimaryColor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/keyLine_4"
+                    app:endIconDrawable="@drawable/ic_baseline_calendar_today_24"
+                    app:endIconMode="custom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_title_layout">
 
-            <TextView
-                android:id="@+id/category_title_text"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/detail_date"
+                        style="@style/Widget.MyTheme.EditText.OnPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/operation_date_label"
+                        android:inputType="date"
+                        android:onClick="@{() -> viewModel.onOperationDateClicked()}"
+                        android:text="@{viewModel.operationDate}" />
 
-                style="@style/MyTheme.DayNight.BottomFormSubtitle"
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bottom_layout"
+                style="@style/MyTheme.DayNight.FormBottomContainer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/operation_category_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/keyLine_2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/category_title_text">
+                app:layout_constraintTop_toBottomOf="@+id/top_layout"
+                app:layout_constraintVertical_weight="1">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/amount_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:prefixText="@string/operation_amount_symbol">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/operation_amount_label"
+                        android:inputType="numberDecimal"
+                        android:text="@={`` + viewModel.operation.amount}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/category_title_text"
+                    style="@style/MyTheme.DayNight.BottomFormSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/keyLine_4"
+                    android:text="@string/operation_category_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/amount_layout" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/category_chip_group"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/keyLine_2"
                     android:animateLayoutChanges="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/category_title_text"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:selectionRequired="true"
                     app:singleSelection="true" />
 
-            </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

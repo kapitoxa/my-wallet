@@ -20,6 +20,8 @@
     <string name="operation_title">Редактирование операции</string>
     <string name="operation_name_label">Название</string>
     <string name="operation_date_label">Дата операции</string>
+    <string name="operation_amount_label">Сумма операции</string>
+    <string name="operation_amount_symbol">&#8381;</string>
     <string name="operation_category_label">Категория</string>
     <string name="operation_action_save_label">Сохранить</string>
 

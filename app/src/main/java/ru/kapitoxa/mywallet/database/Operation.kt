@@ -22,6 +22,8 @@ data class Operation(
         @ColumnInfo(name = "operation_date")
         var operationDate: Long = 0L,
 
+        var amount: Double = 0.0,
+
         @ColumnInfo(name = "category_id")
         var categoryId: Long = 0L
 )
