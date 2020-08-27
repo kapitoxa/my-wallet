@@ -20,6 +20,7 @@
             tools:context=".transactions.OperationsFragment">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/operationsList"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:clipToPadding="false"
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/keyLine_4"
-            android:onClick="@{() -> viewModel.navigateToOperationDetail()}"
+            android:onClick="@{() -> viewModel.onFabClicked()}"
             android:src="@drawable/ic_add_white_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

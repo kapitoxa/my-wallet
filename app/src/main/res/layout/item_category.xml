@@ -27,8 +27,8 @@
         <TextView
             android:id="@+id/icon"
             style="@style/MyTheme.DayNight.LetterIcon"
-            app:iconLetterBackground="@{categoryWithType}"
-            app:iconLetterText="@{categoryWithType}"
+            app:iconLetterBackground="@{categoryWithType.category.id}"
+            app:iconLetterText="@{categoryWithType.category.name}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

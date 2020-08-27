@@ -43,11 +43,6 @@ interface WalletDatabaseDao {
     @Query("select * from category_type order by id")
     fun getAllCategoryTypes(): LiveData<List<CategoryType>>
 
-    @Transaction
-    @Query("select * from operation order by id desc")
-    fun getAllOperations(): LiveData<List<Operation>>
-
-    @Transaction
-    @Query("select * from category")
-    fun getCategoryWithAllOperations(): LiveData<List<CategoryWithOperations>>
+    @Query("select * from operation_detail")
+    fun getAllOperationsDetail(): LiveData<List<OperationDetail>>
 }

@@ -16,6 +16,8 @@
     <string name="fragment_categories_bottom_nav_label">Категории</string>
 
     <string name="item_operation_image_default_label">Пустое изображение проведенной операции</string>
+    <string name="item_operation_amount_income">+%s</string>
+    <string name="item_operation_amount_expense">-%s</string>
 
     <string name="operation_title">Редактирование операции</string>
     <string name="operation_name_label">Название</string>

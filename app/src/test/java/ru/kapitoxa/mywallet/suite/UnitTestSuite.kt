@@ -9,6 +9,9 @@ import ru.kapitoxa.mywallet.categorydetail.CategoryDetailViewModelFactoryTest
 import ru.kapitoxa.mywallet.categorydetail.CategoryDetailViewModelTest
 import ru.kapitoxa.mywallet.operationdetail.OperationDetailViewModelFactoryTest
 import ru.kapitoxa.mywallet.operationdetail.OperationDetailViewModelTest
+import ru.kapitoxa.mywallet.operatons.OperationsDiffCallbackTest
+import ru.kapitoxa.mywallet.operatons.OperationsViewModelFactoryTest
+import ru.kapitoxa.mywallet.operatons.OperationsViewModelTest
 
 @ExperimentalCoroutinesApi
 @RunWith(Suite::class)
@@ -18,6 +21,9 @@ import ru.kapitoxa.mywallet.operationdetail.OperationDetailViewModelTest
         CategoriesViewModelTest::class,
         CategoriesViewModelFactoryTest::class,
         OperationDetailViewModelTest::class,
-        OperationDetailViewModelFactoryTest::class
+        OperationDetailViewModelFactoryTest::class,
+        OperationsViewModelTest::class,
+        OperationsViewModelFactoryTest::class,
+        OperationsDiffCallbackTest::class
 )
 class UnitTestSuite

@@ -5,21 +5,31 @@
 
     <data>
 
+        <variable
+            name="operation"
+            type="ru.kapitoxa.mywallet.database.OperationDetail" />
+
+        <variable
+            name="clickListener"
+            type="ru.kapitoxa.mywallet.operations.OperationsListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(operation)}"
         android:padding="@dimen/keyLine_4">
 
-        <ImageView
-            android:id="@+id/operation_image"
-            android:layout_width="@dimen/transaction_image_size"
-            android:layout_height="56dp"
-            android:contentDescription="@string/item_operation_image_default_label"
+        <TextView
+            android:id="@+id/icon"
+            style="@style/MyTheme.DayNight.LetterIcon"
+            app:iconLetterBackground="@{operation.id}"
+            app:iconLetterText="@{operation.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:background="@drawable/ic_shape_oval"
+            tools:text="К" />
 
         <TextView
             android:id="@+id/operation_title"
@@ -28,9 +38,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/keyLine_4"
             android:layout_marginEnd="@dimen/keyLine_4"
+            android:text="@{operation.name}"
+            app:layout_constraintBottom_toTopOf="@+id/operation_type"
             app:layout_constraintEnd_toStartOf="@+id/operation_amount"
-            app:layout_constraintStart_toEndOf="@+id/operation_image"
-            app:layout_constraintTop_toTopOf="@+id/operation_image"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside"
             tools:text="Корм коту" />
 
         <TextView
@@ -39,10 +53,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/keyLine_4"
-            android:layout_marginTop="@dimen/keyLine_2"
             android:layout_marginEnd="@dimen/keyLine_4"
+            android:text="@{operation.categoryName}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/operation_amount"
-            app:layout_constraintStart_toEndOf="@+id/operation_image"
+            app:layout_constraintStart_toEndOf="@+id/icon"
             app:layout_constraintTop_toBottomOf="@+id/operation_title"
             tools:text="Расход" />
 
@@ -50,11 +65,14 @@
             android:id="@+id/operation_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+            android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
             app:layout_constraintBottom_toBottomOf="@+id/operation_type"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/operation_title"
-            tools:text="+45"
-            tools:textColor="@color/color_text_positive" />
+            app:layout_constraintVertical_bias="0.0"
+            app:operationAmount="@{operation}"
+            app:operationAmountTextColor="@{operation}"
+            tools:text="-1 236,50"
+            tools:textColor="@color/color_text_negative" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

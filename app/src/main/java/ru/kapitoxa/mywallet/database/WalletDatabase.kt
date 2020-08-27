@@ -11,11 +11,17 @@ import kotlinx.coroutines.launch
 import ru.kapitoxa.mywallet.R
 import java.util.concurrent.Executors
 
-@Database(entities = [
-    Category::class,
-    CategoryType::class,
-    Operation::class
-], version = 1)
+@Database(
+        entities = [
+            Category::class,
+            CategoryType::class,
+            Operation::class
+        ],
+        views = [
+            OperationDetail::class
+        ],
+        version = 1
+)
 abstract class WalletDatabase : RoomDatabase() {
 
     abstract val walletDatabaseDao: WalletDatabaseDao

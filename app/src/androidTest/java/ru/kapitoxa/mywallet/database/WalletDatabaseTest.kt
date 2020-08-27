@@ -109,7 +109,8 @@ class WalletDatabaseTest {
 
     @Test(expected = SQLiteConstraintException::class)
     fun writeOperationWithNonExistingCategory() = runBlocking {
-        val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(), 1)
+        val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(),
+                0.0, 1)
         walletDatabaseDao.insertOperation(operation)
     }
 
@@ -118,7 +119,8 @@ class WalletDatabaseTest {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 
-        val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(), 1)
+        val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(),
+                0.0, 1)
         walletDatabaseDao.insertOperation(operation)
 
         val fromDb = walletDatabaseDao.getOperation(operation.id)
@@ -131,7 +133,8 @@ class WalletDatabaseTest {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 
-        val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(), 1)
+        val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(),
+                0.0, 1)
         walletDatabaseDao.insertOperation(operation)
 
         operation.name = "Morning coffee"
@@ -143,42 +146,27 @@ class WalletDatabaseTest {
     }
 
     @Test
-    fun writeAndReadAllOperations() = runBlocking {
+    fun readOperationDetailView() = runBlocking {
         val category = Category(1, "Food", 2)
         walletDatabaseDao.insertCategory(category)
 
-        val operation1 = Operation(1, "Weekly restocking", System.currentTimeMillis(), 1)
-        val operation2 = Operation(2, "Morning coffee", System.currentTimeMillis(), 1)
-
-        walletDatabaseDao.insertOperation(operation1)
-        walletDatabaseDao.insertOperation(operation2)
+        val operation = Operation(1, "Weekly restocking", System.currentTimeMillis(),
+                36.92, 1)
+        walletDatabaseDao.insertOperation(operation)
 
         val expected = listOf(
-                operation2,
-                operation1
+                OperationDetail(
+                        operation.id,
+                        operation.name,
+                        operation.operationDate,
+                        operation.amount,
+                        operation.categoryId,
+                        category.name,
+                        category.typeId
+                )
         )
 
-        val fromDb = walletDatabaseDao.getAllOperations().blockingValue
-
-        Assert.assertEquals(expected, fromDb)
-    }
-
-    @Test
-    fun writeAndReadCategoryWithAllOperations() = runBlocking {
-        val category = Category(1, "Food", 2)
-        walletDatabaseDao.insertCategory(category)
-
-        val operation1 = Operation(1, "Weekly restocking", System.currentTimeMillis(), 1)
-        val operation2 = Operation(2, "Morning coffee", System.currentTimeMillis(), 1)
-
-        walletDatabaseDao.insertOperation(operation1)
-        walletDatabaseDao.insertOperation(operation2)
-
-        val expected = listOf(
-                Helper.createCategoryWithOperations(category, operation1, operation2)
-        )
-
-        val fromDb = walletDatabaseDao.getCategoryWithAllOperations().blockingValue
+        val fromDb = walletDatabaseDao.getAllOperationsDetail().blockingValue
 
         Assert.assertEquals(expected, fromDb)
     }
@@ -204,11 +192,6 @@ class WalletDatabaseTest {
             fun convertToCategoryType(context: Context, category: Category): CategoryWithType {
                 val categoryType = createCategoryType(context, category.typeId)
                 return CategoryWithType(category = category, type = categoryType)
-            }
-
-            fun createCategoryWithOperations(category: Category, vararg operations: Operation)
-                    : CategoryWithOperations {
-                return CategoryWithOperations(category = category, operations = operations.asList())
             }
         }
     }
