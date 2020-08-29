@@ -30,6 +30,9 @@
     <string name="categories_action_create_label">Создать</string>
     <string name="categories_action_content_description">Кнопка создания новой категории</string>
 
+    <string name="operations_action_add_label">Добавить</string>
+    <string name="operations_action_add_content_description">Кнопка добавления операции</string>
+
     <string name="category_edit_title">Редактирование категории</string>
     <string name="category_create_title">Создание категории</string>
     <string name="category_name_label">Название</string>

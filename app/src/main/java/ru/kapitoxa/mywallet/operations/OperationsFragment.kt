@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import ru.kapitoxa.mywallet.ExtendedFabOnScrollListener
 import ru.kapitoxa.mywallet.database.WalletDatabase
 import ru.kapitoxa.mywallet.databinding.FragmentOperationsBinding
 
@@ -36,6 +37,7 @@ class OperationsFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.operationsList.adapter = adapter
+        binding.operationsList.addOnScrollListener(ExtendedFabOnScrollListener(binding.fab))
 
         setupObservers()
 
