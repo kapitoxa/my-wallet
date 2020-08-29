@@ -1,6 +1,7 @@
 package ru.kapitoxa.mywallet.operationdetail
 
 import androidx.lifecycle.*
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,8 +30,8 @@ class OperationDetailViewModel(
         }
     }
 
-    private val _showDatePickerDialog = MutableLiveData<Boolean>()
-    val showDatePickerDialog: LiveData<Boolean>
+    private val _showDatePickerDialog = MutableLiveData<Long?>()
+    val showDatePickerDialog: LiveData<Long?>
         get() = _showDatePickerDialog
 
     private val _showOperationNameFieldError = MutableLiveData<Boolean>()
@@ -58,11 +59,16 @@ class OperationDetailViewModel(
     }
 
     fun onOperationDateClicked() {
-        _showDatePickerDialog.value = true
+        _operation.value!!.operationDate.let {
+            _showDatePickerDialog.value = when (it) {
+                0L -> MaterialDatePicker.todayInUtcMilliseconds()
+                else -> it
+            }
+        }
     }
 
     fun onShowedDatePickerDialog() {
-        _showDatePickerDialog.value = false
+        _showDatePickerDialog.value = null
     }
 
     fun onCategoryChecked(categoryId: Long, isChecked: Boolean) {

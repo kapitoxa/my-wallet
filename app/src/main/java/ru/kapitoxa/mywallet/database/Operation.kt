@@ -1,7 +1,10 @@
 package ru.kapitoxa.mywallet.database
 
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(
         tableName = "operation",
         foreignKeys = [
@@ -26,4 +29,4 @@ data class Operation(
 
         @ColumnInfo(name = "category_id")
         var categoryId: Long = 0L
-)
+) : Parcelable

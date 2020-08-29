@@ -31,7 +31,9 @@ class OperationDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentOperationDetailBinding.inflate(inflater)
-        operation = Operation()
+
+        val arguments = OperationDetailFragmentArgs.fromBundle(requireArguments())
+        operation = arguments.operation
 
         val application = requireActivity().application
         val dataSource = WalletDatabase.getInstance(application).walletDatabaseDao
@@ -104,16 +106,16 @@ class OperationDetailFragment : Fragment() {
             }
         })
 
-        viewModel.showDatePickerDialog.observe(viewLifecycleOwner, { show ->
-            if (show) {
+        viewModel.showDatePickerDialog.observe(viewLifecycleOwner, { timestamp ->
+            timestamp?.let {
                 val picker = MaterialDatePicker.Builder.datePicker()
                         .setInputMode(MaterialDatePicker.INPUT_MODE_CALENDAR)
                         .setTitleText(R.string.operation_date_label)
-                        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                        .setSelection(timestamp)
                         .build()
 
-                picker.addOnPositiveButtonClickListener {
-                    viewModel.setOperationDate(it)
+                picker.addOnPositiveButtonClickListener { selected ->
+                    viewModel.setOperationDate(selected)
                 }
 
                 picker.show(childFragmentManager, picker.toString())

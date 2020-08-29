@@ -46,7 +46,7 @@ class OperationsFragment : Fragment() {
         viewModel.navigateToOperationDetail.observe(viewLifecycleOwner, {
             it?.let {
                 this.findNavController().navigate(
-                        OperationsFragmentDirections.actionOperationsFragmentToDetailFragment())
+                        OperationsFragmentDirections.actionOperationsFragmentToDetailFragment(it))
                 viewModel.onNavigatedToOperationDetail()
             }
         })

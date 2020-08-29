@@ -2,6 +2,7 @@ package ru.kapitoxa.mywallet.operationdetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.datepicker.MaterialDatePicker
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -26,7 +27,7 @@ class OperationDetailViewModelTest {
 
     private lateinit var operationDateLiveData: LiveData<String?>
 
-    private lateinit var showDatePickerDialogLiveData: LiveData<Boolean>
+    private lateinit var showDatePickerDialogLiveData: LiveData<Long?>
 
     private lateinit var showOperationNameFieldErrorLiveData: LiveData<Boolean>
 
@@ -107,10 +108,11 @@ class OperationDetailViewModelTest {
     @Test
     fun showDatePicker() {
         viewModel.onOperationDateClicked()
-        Assert.assertTrue(showDatePickerDialogLiveData.value!!)
+        Assert.assertEquals(MaterialDatePicker.todayInUtcMilliseconds(),
+                showDatePickerDialogLiveData.value)
 
         viewModel.onShowedDatePickerDialog()
-        Assert.assertFalse(showDatePickerDialogLiveData.value!!)
+        Assert.assertNull(showDatePickerDialogLiveData.value)
     }
 
     @Test
